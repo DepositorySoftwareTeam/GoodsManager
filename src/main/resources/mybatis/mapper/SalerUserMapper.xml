@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dst.goodsmanager.mapper.SalerUserMapper">
+    <resultMap type="SalerUser" id="loginMap" >
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+    </resultMap>
+    <select id="querySalerUserByUsername" parameterType="String" resultMap="loginMap">
+        select username,password from saler_account where username= #{username};
+    </select>
+
+
+    <select id="getIdSalerUserByUsername" parameterType="String" resultType="Long">
+        select username_id from saler_account where username= #{username};
+    </select>
+
+    <insert id="addSalerUser" parameterType="SalerUser">
+        insert into saler_account (username,password) value (#{username},#{password});
+    </insert>
+
+    <insert id="addSalerUserProfile" parameterType="SalerUser">
+        insert into saler_account_profile (username_id,nickname) value (#{username_id},#{nickname});
+    </insert>
+
+
+</mapper>

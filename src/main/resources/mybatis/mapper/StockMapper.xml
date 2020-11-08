@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dst.goodsmanager.mapper.StockMapper">
+    <!-- <resultMap type="Stock" id="StockInMap" >
+        <result column="barcode" property="barcode" />
+        <result column="location" property="location" />
+        <result column="SUM(amount)" property="amount" />
+        <result column="SUM(amount*price_in)" property="total_in" />
+    </resultMap> -->
+
+    <!-- <resultMap type="Stock" id="StockOutMap" >
+        <result column="barcode" property="barcode" />
+        <result column="location" property="location" />
+        <result column="SUM(amount)" property="amount" />
+        <result column="SUM(amount*price_out)" property="total_out" />
+    </resultMap> -->
+
+
+
+    <select id="listStockOfUserId" parameterType="long" resultType="Stock">
+        select inline.barcode,usergoods.goodname,usergoods.good_photo,inline.location ,amount_in,total_money_in,amount_out,total_money_out from 
+        (
+         (select barcode,location,SUM(transit_in.amount)AS amount_in,SUM(transit_in.amount*price_in)AS total_money_in
+         from transit_in where username_id=#{username_id} GROUP BY barcode,location) AS inline
+         left join
+         (select barcode,location,SUM(transit_out.amount)AS amount_out,SUM(transit_out.amount*price_out)AS total_money_out
+         from transit_out where username_id=#{username_id} GROUP BY barcode,location) AS outline
+         on outline.barcode=inline.barcode AND outline.location=inline.location
+        )
+        left join (select * from goods where username_id=#{username_id}) AS usergoods on usergoods.barcode=inline.barcode
+        ;
+    </select>
+    
+    <!-- <select id="listStockOfUserId" parameterType="long" resultType="Stock">
+        select inline.barcode,inline.location ,amount_in,total_money_in,amount_out,total_money_out from 
+        (select barcode,location,SUM(transit_in.amount)AS amount_in,SUM(transit_in.amount*price_in)AS total_money_in
+        from transit_in where username_id=#{username_id} GROUP BY barcode,location) AS inline
+        left join
+        (select barcode,location,SUM(transit_out.amount)AS amount_out,SUM(transit_out.amount*price_out)AS total_money_out
+        from transit_out where username_id=#{username_id} GROUP BY barcode,location) AS outline
+        on outline.barcode=inline.barcode AND outline.location=inline.location 
+        ;
+    
+    </select> -->
+</mapper>

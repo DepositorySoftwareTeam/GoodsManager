@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dst.goodsmanager.mapper.ItemMapper">
+    <resultMap type="Item" id="ItemListMap" >
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+    </resultMap>
+    <select id="queryItemByBarcode" parameterType="String" resultType="Item">
+        select * from item_profile where barcode= #{barcode}
+    </select>
+
+
+    <select id="listItemOfUser" parameterType="String" resultType="Item">
+        select * from item_profile where username= #{username}
+    </select>
+
+
+    <insert id="addItemOfUser" parameterType="Item">
+        insert into item_profile value (
+            #{username},
+            #{profilephoto},
+            #{barcode},
+            #{product_name},
+            #{price_in},
+            #{price_out},
+            #{amount},
+            #{date},
+            #{operator},
+            #{customer},
+            #{comments}
+            );
+    </insert>
+    <update id="updateItemByBarcode" parameterType="Item">
+        update item_profile set
+            username=#{username},
+            profilephoto=#{profilephoto},
+            product_name=#{product_name},
+            price_in=#{price_in},
+            price_out=#{price_out},
+            amount=#{amount},
+            date=#{date},
+            operator=#{operator},
+            customer=#{customer},
+            comments=#{comments}
+        where barcode=#{barcode}
+    </update>
+</mapper>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dst.goodsmanager.mapper.SupplierMapper">
+    <!-- <resultMap type="Stock" id="StockInMap" >
+        <result column="barcode" property="barcode" />
+        <result column="location" property="location" />
+        <result column="SUM(amount)" property="amount" />
+        <result column="SUM(amount*price_in)" property="total_in" />
+    </resultMap> -->
+
+    <!-- <resultMap type="Stock" id="StockOutMap" >
+        <result column="barcode" property="barcode" />
+        <result column="location" property="location" />
+        <result column="SUM(amount)" property="amount" />
+        <result column="SUM(amount*price_out)" property="total_out" />
+    </resultMap> -->
+    <!-- <insert id="addGoods" parameterType="Goods">
+        insert into goods VALUES(
+            #{username_id},
+            #{barcode},
+            #{goodname},
+            #{good_photo}
+            );
+    </insert> -->
+    <!-- <select id="listGoodsOfUserId" parameterType="long" resultType="Goods">
+        select * 
+        from goods where username_id= #{username_id}
+        ;
+    </select> -->
+    <select id="querySupplierOfUserIdBySupplierName" resultType="Supplier">
+        select * 
+        from supplier where username_id= #{username_id} AND supplier_name=#{supplier_name}
+        ;
+    </select>
+    <select id="listSupplierOfUserId" resultType="Supplier">
+        select * 
+        from supplier where username_id= #{username_id}
+        ;
+    </select>
+    <insert id="addSupplier" parameterType="Supplier">
+        insert into supplier (
+            username_id,
+            supplier_name,
+            date,
+            operator,
+            mobilephone,
+            telephone,
+            address,
+            comments
+            )
+        value (
+            #{username_id},
+            #{supplier_name},
+            #{date},
+            #{operator},
+            #{mobilephone},
+            #{telephone},
+            #{address},
+            #{comments}
+        )
+        ON DUPLICATE KEY UPDATE
+        date=#{date},
+        operator=#{operator},
+        mobilephone=#{mobilephone},
+        telephone=#{telephone},
+        address=#{address},
+        comments=#{comments}
+        ; 
+    </insert>
+
+</mapper>

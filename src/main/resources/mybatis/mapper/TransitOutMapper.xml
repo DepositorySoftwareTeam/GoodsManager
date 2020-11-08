@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dst.goodsmanager.mapper.TransitOutMapper">
+    <select id="listTransitOutOfUserId" parameterType="long" resultType="TransitOut">
+        select
+        *
+        from transit_out where username_id= #{username_id}
+    </select>
+
+
+<!-- 
+    username_id,
+    supplier,
+    barcode,
+    price_in,
+    amount,
+    location,
+    date,
+    operator,
+    comments  -->
+
+    <insert id="addTransitOut" parameterType="TransitOut">
+        insert into transit_out (
+            username_id,
+            buyer,
+            barcode,
+            price_out,
+            amount,
+            location,
+            date,
+            operator,
+            comments
+            )
+        value (
+            #{username_id},
+            #{buyer},
+            #{barcode},
+            #{price_out},
+            #{amount},
+            #{location},
+            #{date},
+            #{operator},
+            #{comments}
+            );
+    </insert>
+
+
+
+</mapper>
