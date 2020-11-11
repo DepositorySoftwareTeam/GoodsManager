@@ -1,0 +1,30 @@
+
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:insert="~{views/common/head::statichead}"></head>
+    <body class="cbp-spmenu-push">
+        <div class="main-content">
+            <div th:insert="~{views/common/head::staticbar}"></div>
+			<div th:insert="~{views/common/head::staticheadbar}"></div>
+
+
+			<div id="page-wrapper" style="min-height: 904px;">
+				<div class="main-page">
+
+
+                    <form action="/api/upload" method="post" enctype="multipart/form-data">
+                        <input name="_csrf" type="hidden" th:value="${_csrf.token}" />
+                        <input type="file" id="img" name="img">
+                        <button type="submit">上传</button>
+                    </form>
+                    
+                </div>
+			</div>
+
+
+			<div th:insert="~{views/common/head::staticfooter}"></div>
+		</div>
+	</body>
+</html>

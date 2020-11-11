@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:insert="~{views/common/head::statichead}"></head>
+    <body class="cbp-spmenu-push">
+        <div class="main-content">
+            <div th:insert="~{views/common/head::staticbar}"></div>
+			<div th:insert="~{views/common/head::staticheadbar}"></div>
+			
+
+			<div id="page-wrapper" style="min-height: 860px;">
+				<div class="main-page login-page ">
+					<h2 class="title1">Login</h2>
+					<div class="widget-shadow">
+						<div class="login-body">
+							<form action="/api/login" method="post">
+								
+								<input type="email" class="user" name="username" placeholder="Enter Your Email" required="">
+								<input type="password" name="password" class="lock" placeholder="Password" required="">
+								<input name="_csrf" type="hidden" th:value="${_csrf.token}" />
+
+								<div class="forgot-grid">
+									<!-- <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Remember me</label> -->
+									<!-- <div class="forgot">
+										<a href="http://demo2.cssmoban.com/cssthemes6/svrfdrfseffsf32ff/login.html#">forgot password?</a>
+									</div> -->
+									<div class="clearfix"> </div>
+								</div>
+								<input type="submit" name="Sign In" value="Sign In">
+								<div class="registration">
+									Don't have an account ?
+									<a class="" href="/signup">
+										Create an account
+									</a>
+								</div>
+							</form>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+
+
+			<div th:insert="~{views/common/head::staticfooter}"></div>
+		</div>
+	</body>
+</html>

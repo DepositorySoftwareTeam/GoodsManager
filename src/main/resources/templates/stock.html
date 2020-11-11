@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="~{views/common/head::statichead}"></head>
+
+<body class="cbp-spmenu-push">
+	<div class="main-content">
+		<div th:insert="~{views/common/head::staticbar}"></div>
+		<div th:insert="~{views/common/head::staticheadbar}"></div>
+
+
+		<div id="page-wrapper" style="min-height: 904px;">
+			<div class="main-page">
+				<div class="tables">
+					<div class="table-responsive bs-example widget-shadow">
+
+						<form class="form-inline">
+							<a href="transit_in/add">
+								<button type="button" class="btn btn-success btn-flat btn-pri">
+									<i class="fa fa-plus" aria-hidden="true"></i>
+									添加
+								</button>
+							</a>
+							<div class="form-group">
+								<!-- <label for="exampleInputName2">商品名</label> -->
+								<input type="text" class="form-control" id="exampleInputName2" placeholder="商品名">
+							</div>
+							<button type="button" class="btn btn-info btn-flat btn-pri">
+								<i class="fa fa-search" aria-hidden="true"></i>
+								查询
+							</button>
+
+							<div class="form-group">
+								<!-- <label for="exampleInputName2">条形码</label> -->
+								<input type="text" class="form-control" id="exampleInputName2" placeholder="条形码">
+							</div>
+							<button type="button" class="btn btn-info btn-flat btn-pri">
+								<i class="fa fa-search" aria-hidden="true"></i>
+								查询
+							</button>
+						</form>
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>条形码</th>
+									<th>名称</th>
+									<th>存量</th>
+									<!-- <th>盈余</th> -->
+									<th>平均入货价</th>
+									<th>平均出货价</th>
+									<th>总入货量</th>
+									<th>入货总花费</th>
+									<th>总销售量</th>
+									<th>总销售额</th>
+									<th>仓库位置</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="item in message" :key="item.message">
+									<td>
+										<a v-bind:href="'../goods/'+item.barcode">{{item.barcode}}</a>
+									</td>
+									<td>{{item.goodname}}</td>
+									<td>{{item.amount_in-item.amount_out}}</td>
+
+									<!-- <td>{{item.total_money_out-item.total_money_in}}</td> -->
+									<td>{{(item.total_money_in/item.amount_in).toFixed(2)}}</td>
+									<td>{{(item.total_money_out/item.amount_out).toFixed(2)}}</td>
+									
+									<!-- <td>{{((item.amount_in-item.amount_out)*(item.total_money_out/item.amount_out)-(item.total_money_in/item.amount_in)).toFixed(2)}}</td> -->
+									<td>{{item.amount_in}}</td>
+									<td>{{item.total_money_in}}</td>
+									<td>{{item.amount_out}}</td>
+									<td>{{item.total_money_out}}</td>
+									<td>{{item.location}}</td>
+									<td><img style="width:40px" alt="无" v-bind:src="item.good_photo.length<16?'/none.jpg':'data:image/png;base64,'+item.good_photo" /></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div th:insert="~{views/common/head::staticfooter}"></div>
+	</div>
+</body>
+<script>
+	var app = new Vue({
+		el: '#page-wrapper',
+		data: {
+			message: [(${ data })]
+		}
+	})
+</script>
+</html>

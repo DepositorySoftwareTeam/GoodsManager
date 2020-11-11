@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="~{views/common/head::statichead}"></head>
+
+<body class="cbp-spmenu-push">
+	<div class="main-content">
+		<div th:insert="~{views/common/head::staticbar}"></div>
+		<div th:insert="~{views/common/head::staticheadbar}"></div>
+
+
+		<div id="page-wrapper" style="min-height: 904px;">
+			<div class="main-page">
+				<div class="tables">
+					<div class="table-responsive bs-example widget-shadow">
+
+
+
+						<form class="form-inline">
+							<a href="supplier/add">
+								<button type="button" class="btn btn-success btn-flat btn-pri">
+									<i class="fa fa-plus" aria-hidden="true"></i>
+									添加
+								</button>
+							</a>
+							<div class="form-group">
+								<!-- <label for="exampleInputName2">商品名</label> -->
+								<input type="text" class="form-control" id="exampleInputName2" placeholder="商品名">
+							</div>
+							<button type="button" class="btn btn-info btn-flat btn-pri">
+								<i class="fa fa-search" aria-hidden="true"></i>
+								查询
+							</button>
+
+							<div class="form-group">
+								<!-- <label for="exampleInputName2">条形码</label> -->
+								<input type="text" class="form-control" id="exampleInputName2" placeholder="条形码">
+							</div>
+							<button type="button" class="btn btn-info btn-flat btn-pri">
+								<i class="fa fa-search" aria-hidden="true"></i>
+								查询
+							</button>
+
+						</form>
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>供应商</th>
+									<th>登记日期</th>
+									<th>登记人</th>
+									<th>电话</th>
+									<th>座机</th>
+									<th>地址</th>
+									<th>备注</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="item in message" :key="item.message">
+									<td><a v-bind:href="'../supplier/'+item.supplier_name">{{item.supplier_name}}</a></td>
+									<td>{{item.date}}</td>
+									<td>{{item.operator}}</td>
+									<td>{{item.date}}</td>
+									<td>{{item.telephone}}</td>
+									<td>{{item.address}}</td>
+									<td>{{item.comments}}</td>
+								</tr>
+								<!-- <a href="#jjj"><button type="button" class="btn btn-danger">删除</button></a> -->
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div th:insert="~{views/common/head::staticfooter}"></div>
+	</div>
+</body>
+<script>
+	var app = new Vue({
+		el: '#page-wrapper',
+		data: {
+			message: [(${ data })]
+		}
+	})
+</script>
+</html>
